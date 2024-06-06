@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Poetry 
         run: |
-          curl -sSl https://install.python-poetry.org | python 3 -
+          curl -sSL https://install.python-poetry.org | python3 -
       
       - name: Configure Poetry path 
         run: |
