@@ -16,4 +16,4 @@ RUN poetry install --no-root
 
 COPY . .
 
-CMD [ "poetry", "run", "python", "-m", "unittest", "discover", "-s", "tests" ]
+CMD ["poetry", "run", "pytest", "tests"]
