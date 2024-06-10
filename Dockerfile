@@ -1,8 +1,6 @@
 FROM python:3.12.3-slim
 
-RUN apt-get update && apt-get install -y curl
-
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN pip install --no-cache-dir --break-system-packages poetry
 
 ENV PATH="/root/.local/bin:${PATH}"
 
