@@ -1,4 +1,4 @@
-FROM python:3.12.4-slim
+FROM python:3.12.3-slim
 
 RUN pip install --no-cache-dir --break-system-packages poetry
 
