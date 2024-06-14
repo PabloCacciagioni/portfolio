@@ -6,10 +6,9 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      -"8000:8000"
+      - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      -.:/app
-    command: poetry run uvicorn api:app --host 0.0.0.0 --port 8000
-    
+      - .:/app
+    command: poetry run uvicorn todo_app.api:app --host 0.0.0.0 --port 8000
