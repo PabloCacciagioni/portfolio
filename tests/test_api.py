@@ -1,6 +1,8 @@
 import pytest
 from httpx import AsyncClient
+
 from todo_app.api import app
+
 
 @pytest.mark.asyncio
 async def test_status():

@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "todo-app"
+name = "todo_app"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Pablo Cacciagioni <pablo.cacciagion@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -22,3 +22,8 @@ pytest-asyncio = "^0.23.7"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra --cov-report=term --cov-report=xml --cov=todo_app"
+testpaths = ["tests"]
