@@ -43,6 +43,14 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+      
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          untill pg_isready -h localhost -p 8000 -U todouser -d tododb; do
+            echo "Waiting for PostgreSQL to start..."
+            sleep 2
+          done
+          echo "PostgreSQL is ready"
 
       - name: Run tests
         env:
