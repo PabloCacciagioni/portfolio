@@ -1,8 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from .database import engine, Base, get_db
+from . import models
 
 app = FastAPI()
 
+Base.metadata.create_all(bind=engine)
+
 
 @app.get("/status")
-async def get_status():
+async def get_status(db: Session = Depends(get_db)):
     return {"status": "ok"}
