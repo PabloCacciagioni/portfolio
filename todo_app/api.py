@@ -7,12 +7,6 @@ app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
-@app.get("/")
-def read_root(db: Session = Depends(get_db)):
-    return {"message": "Hello World"}
-
-
-
 @app.get("/status")
 async def get_status():
     return {"status": "ok"}

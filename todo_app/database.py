@@ -1,16 +1,15 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlmodel import SQLModel, create_engine, Session
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+import os
 
-DATABASE_URL= "postgresql://todouser:todopass@localhost:8000/tododb"
+DATABASE_URL = os.getenv("PG_DB_URL", "postgresql://todouser:todopass@localhost:5432/tododb")
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+engine = create_async_engine(DATABASE_URL, echo=True, future=True)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.create_all)
+
+async def get_session():
+    async with AsyncSession(engine) as session:
+        yield session
