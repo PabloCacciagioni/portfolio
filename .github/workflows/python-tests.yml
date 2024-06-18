@@ -58,5 +58,6 @@ jobs:
           POSTGRES_USER: todouser
           POSTGRES_PASSWORD: todopass
           POSTGRES_HOST: localhost
+          PG_DB_URL: postgresql://todouser:todopass@localhost:5432/tododb
         run: |
           poetry run pytest
