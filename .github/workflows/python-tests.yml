@@ -11,7 +11,7 @@ jobs:
       postgres: 
         image: postgres:16-alpine
         ports: 
-          - 8000:8000
+          - 5432:5432
         env: 
           POSTGRES_DB: tododb
           POSTGRES_USER: todouser
@@ -43,6 +43,14 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+      
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U todouser -d tododb; do
+            echo "Waiting for PostgreSQL to start..."
+            sleep 2
+          done
+          echo "PostgreSQL is ready"
 
       - name: Run tests
         env:
@@ -50,5 +58,6 @@ jobs:
           POSTGRES_USER: todouser
           POSTGRES_PASSWORD: todopass
           POSTGRES_HOST: localhost
+          PG_DB_URL: postgresql://todouser:todopass@localhost:5432/tododb
         run: |
           poetry run pytest
