@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String
-from .database import Base
+from sqlmodel import SQLModel, Field
+from typing import Optional
 
-class Item(Base):
-    __tablename__ = "items"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+class Todo(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    title: str
